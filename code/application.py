@@ -227,37 +227,37 @@ def export():
 
     return redirect(url)
 
-@application.route("/global_top")
-def global_top():
-    token = session.get("access_token")
-    if not token:
-        return redirect(url_for("login"))
-
-    headers = {"Authorization": f"Bearer {token}"}
-
-    # Example: use the Spotify "Top 50 – Global" playlist
-    # Playlist ID: 37i9dQZEVXbMDoHDwVN2tF
-    playlist_id = "37i9dQZEVXbMDoHDwVN2tF"
-    playlist_resp = requests.get(
-        f"{SPOTIFY_API_BASE_URL}/playlists/{playlist_id}/tracks?limit=20&market=US",
-        headers=headers
-    ).json()
-
-    tracks = playlist_resp.get("items", [])
-
-    print("Spotify response:", playlist_resp, flush=True)
-
-    # Extract top songs, artists, albums
-    top_songs = [{"name": t["track"]["name"], "artist": t["track"]["artists"][0]["name"]} for t in tracks]
-    top_artists = list({t["track"]["artists"][0]["name"]: t for t in tracks}.keys())
-    albums = list({t["track"]["album"]["name"]: t for t in tracks}.keys())
-
-    return render_template(
-        "global_top.html",
-        tracks=top_songs,
-        artists=top_artists,
-        albums=albums
-    )
+# @application.route("/global_top")
+# def global_top():
+#     token = session.get("access_token")
+#     if not token:
+#         return redirect(url_for("login"))
+#
+#     headers = {"Authorization": f"Bearer {token}"}
+#
+#     # Example: use the Spotify "Top 50 – Global" playlist
+#     # Playlist ID: 37i9dQZEVXbMDoHDwVN2tF
+#     playlist_id = "37i9dQZEVXbMDoHDwVN2tF"
+#     playlist_resp = requests.get(
+#         f"{SPOTIFY_API_BASE_URL}/playlists/{playlist_id}/tracks?limit=20&market=US",
+#         headers=headers
+#     ).json()
+#
+#     tracks = playlist_resp.get("items", [])
+#
+#     print("Spotify response:", playlist_resp, flush=True)
+#
+#     # Extract top songs, artists, albums
+#     top_songs = [{"name": t["track"]["name"], "artist": t["track"]["artists"][0]["name"]} for t in tracks]
+#     top_artists = list({t["track"]["artists"][0]["name"]: t for t in tracks}.keys())
+#     albums = list({t["track"]["album"]["name"]: t for t in tracks}.keys())
+#
+#     return render_template(
+#         "global_top.html",
+#         tracks=top_songs,
+#         artists=top_artists,
+#         albums=albums
+#     )
 
 if __name__ == "__main__":
     application.run(debug=True)
