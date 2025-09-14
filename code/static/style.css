@@ -1,0 +1,78 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f9f9f9;
+    margin: 0;
+}
+
+nav {
+    background: #222;
+    padding: 1rem;
+}
+
+nav a {
+    color: white;
+    margin-right: 1rem;
+    text-decoration: none;
+}
+
+.container {
+    padding: 2rem;
+}
+
+.chart-container {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+}
+
+/* Login page styling */
+.login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #121212, #1db954);
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+.login-container {
+  text-align: center;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: #e0e0e0;
+}
+
+.login-box {
+  background: #181818;
+  padding: 2rem 3rem;
+  border-radius: 1rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  display: inline-block;
+}
+
+.spotify-logo {
+  width: 80px;
+  margin-bottom: 1.5rem;
+}
+
+.login-button {
+  display: inline-block;
+  background-color: #1db954;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.login-button:hover {
+  background-color: #1ed760;
+}

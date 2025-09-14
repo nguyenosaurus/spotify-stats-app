@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-4">Current Most Played Globally</h1>
+
+    <div class="card p-4 mb-4">
+        <h2>Top Songs</h2>
+        <canvas id="tracksChart"></canvas>
+    </div>
+
+    <div class="card p-4 mb-4">
+        <h2>Top Artists</h2>
+        <canvas id="artistsChart"></canvas>
+    </div>
+
+    <div class="card p-4 mb-4">
+        <h2>Top Albums</h2>
+        <canvas id="albumsChart"></canvas>
+    </div>
+</div>
+
+<script>
+    const trackLabels = {{ tracks|map(attribute="name")|list|tojson }};
+    const trackData = Array(trackLabels.length).fill(1);  // placeholder, or use popularity if you want
+
+    const artistLabels = {{ artists|list|tojson }};
+    const artistData = Array(artistLabels.length).fill(1);
+
+    const albumLabels = {{ albums|list|tojson }};
+    const albumData = Array(albumLabels.length).fill(1);
+
+    function makeChart(ctx, labels, data, label) {
+        new Chart(ctx, {
+            type: "bar",
+            data: { labels: labels, datasets: [{ label: label, data: data, backgroundColor: "rgba(75, 192, 192, 0.6)" }] },
+            options: { responsive: true }
+        });
+    }
+
+    makeChart(document.getElementById("tracksChart"), trackLabels, trackData, "Top Tracks");
+    makeChart(document.getElementById("artistsChart"), artistLabels, artistData, "Top Artists");
+    makeChart(document.getElementById("albumsChart"), albumLabels, albumData, "Top Albums");
+</script>
+{% endblock %}

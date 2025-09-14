@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Your Spotify Stats</h1>
+
+<!-- Time Range Selector -->
+<form method="get" action="{{ url_for('stats') }}">
+    <label for="time_range">Select Time Range:</label>
+    <select name="time_range" id="time_range" onchange="this.form.submit()">
+        <option value="short_term" {% if current_time_range == 'short_term' %}selected{% endif %}>Last 4 weeks</option>
+        <option value="medium_term" {% if current_time_range == 'medium_term' %}selected{% endif %}>Last 6 months</option>
+        <option value="long_term" {% if current_time_range == 'long_term' %}selected{% endif %}>All time</option>
+    </select>
+</form>
+
+<!-- Top Tracks -->
+<h2 class="mt-4">Top Tracks</h2>
+<ol class="list-group mb-4">
+    {% for t in tracks %}
+    <li class="list-group-item d-flex align-items-center">
+        {% if t.image %}
+        <img src="{{ t.image }}" alt="{{ t.name }}"
+             class="rounded me-3"
+             style="width:30px; height:30px; object-fit:cover;">
+        {% endif %}
+        <span class="d-flex align-items-center">
+            {{ t.name }}
+            <small class="text-muted ms-2">by {{ t.artist }}</small>
+        </span>
+    </li>
+    {% endfor %}
+</ol>
+
+<!-- Top Artists -->
+<h2>Top Artists</h2>
+<ol class="list-group mb-4">
+    {% for artist in artists %}
+    <li class="list-group-item d-flex align-items-center">
+        {% if artist.image %}
+        <img src="{{ artist.image }}" alt="{{ artist.name }}"
+             class="rounded-circle me-3"
+             style="width:30px; height:30px; object-fit:cover;">
+        {% endif %}
+        <span>{{ artist.name }}</span>
+    </li>
+    {% endfor %}
+</ol>
+
+<!-- Top Albums -->
+<h2>Top Albums</h2>
+<ol class="list-group mb-4">
+    {% for album in albums %}
+    <li class="list-group-item d-flex align-items-center">
+        {% if album.image %}
+        <img src="{{ album.image }}" alt="{{ album.name }}"
+             class="rounded me-3"
+             style="width:30px; height:30px; object-fit:cover;">
+        {% endif %}
+        <span>{{ album.name }} <small class="text-muted">({{ album.count }} songs)</small></span>
+    </li>
+    {% endfor %}
+</ol>
+
+<!-- Export Button -->
+<form action="{{ url_for('export') }}" method="get">
+    <input type="hidden" name="time_range" value="{{ current_time_range }}">
+    <button type="submit" class="btn btn-primary">
+        📂 Export Report
+    </button>
+</form>
+
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}Recently Played - Spotify Stats{% endblock %}
+
+{% block content %}
+<h1>🎵 Recently Played Stats</h1>
+
+<div class="chart-container">
+    <h2>Top Artists</h2>
+    <canvas id="artistsChart" height="120"></canvas>
+</div>
+
+<div class="chart-container">
+    <h2>Top Albums</h2>
+    <canvas id="albumsChart" height="120"></canvas>
+</div>
+
+<div class="chart-container">
+    <h2>Plays Per Day</h2>
+    <canvas id="playsChart" height="120"></canvas>
+</div>
+
+<script>
+    const stats = {{ stats|tojson }};
+
+    // --- Top Artists ---
+    const artistLabels = stats.top_artists.map(a => a.name);
+    const artistCounts = stats.top_artists.map(a => a.count);
+    new Chart(document.getElementById('artistsChart'), {
+        type: 'bar',
+        data: {
+            labels: artistLabels,
+            datasets: [{
+                label: 'Play Count',
+                data: artistCounts,
+                backgroundColor: 'rgba(54, 162, 235, 0.7)'
+            }]
+        },
+        options: { responsive: true, plugins: { legend: { display: false } } }
+    });
+
+    // --- Top Albums ---
+    const albumLabels = stats.top_albums.map(a => a.name);
+    const albumCounts = stats.top_albums.map(a => a.count);
+    new Chart(document.getElementById('albumsChart'), {
+        type: 'bar',
+        data: {
+            labels: albumLabels,
+            datasets: [{
+                label: 'Play Count',
+                data: albumCounts,
+                backgroundColor: 'rgba(255, 99, 132, 0.7)'
+            }]
+        },
+        options: { responsive: true, plugins: { legend: { display: false } } }
+    });
+
+    // --- Plays Per Day ---
+    const dayLabels = stats.plays_per_day.map(d => d.day);
+    const dayCounts = stats.plays_per_day.map(d => d.count);
+    new Chart(document.getElementById('playsChart'), {
+        type: 'line',
+        data: {
+            labels: dayLabels,
+            datasets: [{
+                label: 'Plays',
+                data: dayCounts,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                fill: false,
+                tension: 0.2
+            }]
+        },
+        options: { responsive: true }
+    });
+</script>
+{% endblock %}
