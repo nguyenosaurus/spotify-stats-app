@@ -1,8 +1,38 @@
 body {
-    font-family: Arial, sans-serif;
-    background: #f9f9f9;
-    margin: 0;
+    background-color: #121212; /* Dark Spotify background */
+    color: #fff; /* White text */
+    font-family: 'Helvetica Neue', Arial, sans-serif;
 }
+
+h1, h2 {
+    color: #1DB954; /* Spotify green for titles */
+    font-weight: bold;
+  }
+
+.list-group-item {
+    background-color: #181818;
+    border: none;
+    color: #fff;
+  }
+
+  .nav-tabs .nav-link {
+    color: #bbb;
+    background-color: #181818;
+    border: none;
+  }
+  .nav-tabs .nav-link.active {
+    color: #1DB954;
+    background-color: #121212;
+    border-bottom: 2px solid #1DB954;
+  }
+
+  .btn-primary {
+    background-color: #1DB954;
+    border: none;
+  }
+  .btn-primary:hover {
+    background-color: #1ed760;
+  }
 
 nav {
     background: #222;
@@ -25,7 +55,20 @@ nav a {
     border-radius: 12px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     margin-bottom: 2rem;
+    max-width: 333px;   /* shrink width */
+    margin: 20px auto;
+    flex: 1 1 333px;        /* each chart takes ~400px width */
 }
+
+.charts-row {
+    display: flex;
+    justify-content: center; /* center them horizontally */
+    flex-wrap: wrap;        /* allow wrap on smaller screens */
+  }
+
+  canvas {
+    max-height: 250px;  /* shrink height */
+  }
 
 /* Login page styling */
 .login-page {

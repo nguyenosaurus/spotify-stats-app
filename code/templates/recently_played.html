@@ -5,19 +5,21 @@
 {% block content %}
 <h1>🎵 Recently Played Stats</h1>
 
-<div class="chart-container">
-    <h2>Top Artists</h2>
-    <canvas id="artistsChart" height="120"></canvas>
-</div>
+<div class="charts-row">
+    <div class="chart-container">
+        <h2>Top Artists</h2>
+        <canvas id="artistsChart"></canvas>
+    </div>
 
-<div class="chart-container">
-    <h2>Top Albums</h2>
-    <canvas id="albumsChart" height="120"></canvas>
-</div>
+    <div class="chart-container">
+        <h2>Top Albums</h2>
+        <canvas id="albumsChart"></canvas>
+    </div>
 
-<div class="chart-container">
-    <h2>Plays Per Day</h2>
-    <canvas id="playsChart" height="120"></canvas>
+    <div class="chart-container">
+        <h2>Plays Per Day</h2>
+        <canvas id="playsChart"></canvas>
+    </div>
 </div>
 
 <script>
